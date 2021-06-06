@@ -10,7 +10,7 @@ import com.msmaker.hibernate.demo.entity.Instructor;
 import com.msmaker.hibernate.demo.entity.InstructorDetail;
 import com.msmaker.hibernate.demo.entity.Student;
 
-public class DeleteDemo {
+public class GetInstructorDetailDemo {
 
 	public static void main(String[] args) {
 
@@ -25,22 +25,15 @@ public class DeleteDemo {
 			// start a transaction
 			session.beginTransaction();
 
-			// get instructor by primary key / id
-			int TheId = 1;
-			Instructor tempInstructor = session.get(Instructor.class, TheId);
+			// get the instructor detail object
+			int theId = 2;
+			InstructorDetail tempInstructorDetail = session.get(InstructorDetail.class, theId);
 
-			System.out.println("Found instructor: " + tempInstructor);
+			// print the instructor detail
+			System.out.println("tempInstructorDetail: " + tempInstructorDetail);
 
-			// delete the instructors
-			if (tempInstructor != null) {
-
-				System.out.println("Deleting: " + tempInstructor);
-
-				// Note: Will ALSO delete associated "details" object
-				// because of CascadeType.ALL
-				//
-				session.delete(tempInstructor);
-			}
+			// print the associated instructor
+			System.out.println("the associated instructor: " + tempInstructorDetail.getInstructor());
 
 			// commit transaction
 			session.getTransaction().commit();
